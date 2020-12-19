@@ -13,26 +13,27 @@ function readTextFile(map)
             addData(polyJson["features"], map);
         }
     }
-    httpRequest.open("GET", "https://raw.githubusercontent.com/reedyjw1/CovidMap/feature/state-boundaries/stateGeoJson.json", true);
+    httpRequest.open("GET", "https://raw.githubusercontent.com/reedyjw1/CovidMap/feature/state-boundaries/geoJson20M.json", true);
 
     httpRequest.send(null)
 }
 
 function addData(featureArray, map){
     const introGeoJson = "{\"type\": \"geojson\",\"data\": {\"type\": \"Feature\", \"geometry\": "
+    //const introGeoJson = "{'type': 'geojson','data': {'type': 'Feature', 'geometry': "
     var concatString = introGeoJson + JSON.stringify(featureArray[0].geometry) + "}}"
     console.log(concatString)
-    map.addSource('hi', concatString)
-    // map.addLayer({
-    //     'id': 'hi',
-    //     'type': 'fill',
-    //     'source': 'hi',
-    //     'layout': {},
-    //     'paint': {
-    //         'fill-color': '#088',
-    //         'fill-opacity': 0.8
-    //         }
-    // });
+    map.addSource('hi', JSON.parse(concatString))
+    map.addLayer({
+        'id': 'hi',
+        'type': 'fill',
+        'source': 'hi',
+        'layout': {},
+        'paint': {
+            'fill-color': '#088',
+            'fill-opacity': 0.8
+            }
+    });
 
     // for(var i = 0; i < featureArray.length; i++){
     //     var concatString = introGeoJson + JSON.stringify(featureArray[i].geometry) + "}}"
