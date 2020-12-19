@@ -1,5 +1,6 @@
 function loadStatePoly(stringResponse) {
-   console.log(stringResponse)
+    var polyJson = JSON.parse(stringResponse)
+    console.log(polyJson["features"][0].properties.NAME)
 
 }
 
