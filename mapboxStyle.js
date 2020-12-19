@@ -92,6 +92,12 @@ function addData(featureArray, map){
         hoveredStateId = null;
     });
 
+    map.on('click', 'states-fill', function(e) {
+        if(e.features.length > 0){
+            console.log(e.features[0].properties.STATE_NAME)
+        }
+    })
+
 
 }
 
