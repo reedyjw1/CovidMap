@@ -1,21 +1,21 @@
-function getCovidByState(codeMap) {
+function getCovidByState(codeMap, name) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
         if(httpRequest.readyState == 4 && httpRequest.status == 200){
             var jsonResponse = JSON.parse(httpRequest.responseText);
             let formattedResponse = new Object();
-            console.log(codeMap)
             for (let el in jsonResponse){
                 formattedResponse[codeMap[jsonResponse[el].state]] = jsonResponse[el];
             }
-            console.log(formattedResponse);
+            alert("Deaths: " + formattedResponse[name].death)
+            //console.log(formattedResponse);
         }
     }
     httpRequest.open("GET", "https://api.covidtracking.com/v1/states/current.json", true);
     httpRequest.send(null)
 }
 
-function getStateMapKey(callback) {
+function getStateMapKey(callback, name) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
         if(httpRequest.readyState == 4 && httpRequest.status == 200){
@@ -28,7 +28,7 @@ function getStateMapKey(callback) {
             //     stateCodeToStates[statesObj[el]] = el;
             // }
             //console.log(stateCodeToStates);
-            callback(statesObj);
+            callback(statesObj, name);
         }
     }
     httpRequest.open("GET", "https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_hash.json", true);
