@@ -20,33 +20,20 @@ function readTextFile(map)
 
 function addData(featureArray, map){
     const introGeoJson = "{\"type\": \"geojson\",\"data\": {\"type\": \"Feature\", \"geometry\": "
-    //const introGeoJson = "{'type': 'geojson','data': {'type': 'Feature', 'geometry': "
-    var concatString = introGeoJson + JSON.stringify(featureArray[0].geometry) + "}}"
-    console.log(concatString)
-    map.addSource('hi', JSON.parse(concatString))
-    map.addLayer({
-        'id': 'hi',
-        'type': 'fill',
-        'source': 'hi',
-        'layout': {},
-        'paint': {
-            'fill-color': '#088',
-            'fill-opacity': 0.8
-            }
-    });
 
-    // for(var i = 0; i < featureArray.length; i++){
-    //     var concatString = introGeoJson + JSON.stringify(featureArray[i].geometry) + "}}"
-    //     map.addSource(featureArray[i].properties.NAME, concatString)
-    //     map.addLayer({
-    //         'id': featureArray[i].properties.NAME,
-    //         'type': 'fill',
-    //         'source': featureArray[i].properties.NAME,
-    //         'layout': {},
-    //         'paint': {
-    //             'fill-color': '#088',
-    //             'fill-opacity': 0.8
-    //         }
-    //         });
-    // }
+    for(var i = 0; i < featureArray.length; i++){
+        var concatString = introGeoJson + JSON.stringify(featureArray[i].geometry) + "}}"
+        
+        map.addSource(featureArray[i].properties.NAME, JSON.parse(concatString))
+        map.addLayer({
+            'id': featureArray[i].properties.NAME,
+            'type': 'fill',
+            'source': featureArray[i].properties.NAME,
+            'layout': {},
+            'paint': {
+                'fill-color': '#088',
+                'fill-opacity': 0.1
+            }
+            });
+    }
 }
