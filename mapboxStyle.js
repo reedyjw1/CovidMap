@@ -3,13 +3,15 @@ function loadStatePoly(stringResponse) {
 
 }
 
-function readTextFile()
+function readTextFile(callback)
 {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
         if(httpRequest.readyState == 4 && httpRequest.status == 200)
         callback(httpRequest.responseText)
     }
-    httpRequest.open("GET", "https://api.covidtracking.com/v1/states/current.json", true);
+    httpRequest.open("GET", "https://raw.githubusercontent.com/reedyjw1/CovidMap/feature/state-boundaries/stateGeoJson.json", true);
+    //httpRequest.open("GET", "https://api.covidtracking.com/v1/states/current.json", true);
+
     httpRequest.send(null)
 }
