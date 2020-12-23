@@ -7,7 +7,11 @@ function getCovidByState(codeMap, name) {
             for (let el in jsonResponse){
                 formattedResponse[codeMap[jsonResponse[el].state]] = jsonResponse[el];
             }
-            alert("Deaths: " + formattedResponse[name].death)
+            var popup = new mapboxgl.Popup({ closeOnClick: true })
+                .setLngLat([-84.400200, 42.996129])
+                .setHTML('<h1>Hello World!</h1>')
+                .addTo(map);
+            //alert("Deaths: " + formattedResponse[name].death)
             //console.log(formattedResponse);
         }
     }
