@@ -95,7 +95,7 @@ function addData(featureArray, map){
     map.on('click', 'states-fill', function(e) {
         if(e.features.length > 0){
             let stateName = e.features[0].properties.STATE_NAME
-            getStateMapKey(getCovidByState, stateName)
+            getCovidByState(stateName, map, e)
         }
     })
 
