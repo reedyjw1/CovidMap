@@ -32,8 +32,32 @@ function getCovidByState(name, map, e){
         for (let el in covidObject){
             formattedResponse[statesObj[covidObject[el].state]] = covidObject[el];;
         }
-
-        alert(formattedResponse[name].death);
+        var tableVal = '<h3>' + name+ '</h3>\
+            <table border="1" style="border-collapse: collapse; width: 100%; height: 42px;">\
+            <tbody>\
+            <tr style="height: 21px;">\
+            <td style="width: 200px; height: 21px;">Total Cases</td>\
+            <td style="width: 50px; height: 21px;">\
+            <div>\
+            <div><span>' + formattedResponse[name].positive + '</span></div>\
+            </div>\
+            </td>\
+            </tr>\
+            <tr style="height: 21px;">\
+            <td style="width: 50%; height: 21px;">Deaths</td>\
+            <td style="width: 50%; height: 21px;">\
+            <div>\
+            <div><span>' + formattedResponse[name].death + '</span></div>\
+            </div>\
+            </td>\
+            </tr>\
+            </tbody>\
+            </table>'
+        //alert(formattedResponse[name].death)
+        var popup = new mapboxgl.Popup({ closeOnClick: true })
+        .setLngLat(e.lngLat)
+        .setHTML(tableVal)
+        .addTo(map);
     }
     
 }
